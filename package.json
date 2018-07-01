@@ -1,7 +1,7 @@
 {
-  "name": "vanilla-calendar",
+  "name": "Color Puzzle",
   "version": "1.0.0",
-  "description": "Vanilla Calendar",
+  "description": "Color Puzzle",
   "main": "webpack.config.js",
   "devDependencies": {
     "css-loader": "^0.28.4",
@@ -23,10 +23,10 @@
     "type": "git",
     "url": "git+https://github.com/vanilla-coding/vanilla-calendar.git"
   },
-  "author": "Ken Huh <ken@vanillacoding.co>",
+  "author": "Kim Something / Kim Kyeseung",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vanilla-coding/vanilla-calendar/issues"
+    "url": "https://github.com/kimkyeseung/Color-Puzzle/issues"
   },
-  "homepage": "https://github.com/vanilla-coding/vanilla-calendar#readme"
+  "homepage": "http://kimkyeseung.com"
 }

@@ -1,8 +1,8 @@
-# Creating a calendar
+# Color Puzzle
 
-### 필수 구현 사항
+### 블록을 드래그하여 퍼즐을 맞추세요!
 
-1. 아래 화면을 보시고 최대한 똑같이 구현해주세요.
+<!-- 1. 아래 화면을 보시고 최대한 똑같이 구현해주세요.
 
 ![screenshot](https://github.com/vanilla-coding/vanilla-calendar/blob/master/calendar.gif?raw=true)
 
@@ -78,4 +78,4 @@ git push origin master
 
 작업 내용 저장 후, 다음 링크의 방법을 따라하세요.[PR 만들기](https://help.github.com/articles/creating-a-pull-request-from-a-fork/)
 
-**영어 잘 이해 안되시면 슬랙 채널에 물어보세요!**
+**영어 잘 이해 안되시면 슬랙 채널에 물어보세요!** -->
