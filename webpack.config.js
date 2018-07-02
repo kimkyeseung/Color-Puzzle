@@ -12,7 +12,7 @@ const config = {
     './src/style.less'
   ],
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve('docs'),
     filename: 'bundle.js'
   },
   devServer: {
