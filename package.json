@@ -1,8 +1,9 @@
 {
-  "name": "Color Puzzle",
+  "name": "color-puzzle",
   "version": "1.0.0",
-  "description": "Color Puzzle",
+  "description": "Color puzzle game",
   "main": "webpack.config.js",
+  "dependencies": {},
   "devDependencies": {
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
@@ -21,12 +22,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vanilla-coding/vanilla-calendar.git"
+    "url": "git+https://github.com/kimkyeseung/Color-Puzzle.git"
   },
-  "author": "Kim Something / Kim Kyeseung",
+  "keywords": [
+    "drag",
+    "drop",
+    "colorpuzzle",
+    "hue",
+    "brightness",
+    "saturation"
+  ],
+  "author": "kimKyeseung",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kimkyeseung/Color-Puzzle/issues"
   },
-  "homepage": "http://kimkyeseung.com"
+  "homepage": "https://github.com/kimkyeseung/Color-Puzzle#readme"
 }
