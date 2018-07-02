@@ -20,14 +20,30 @@ var whatQuiz = ['Hue', 'Saturation', 'Brightness'];
 
 var answer;
 
-var hierarchy = [,'거지', '천민', '평민', '부자', '귀족', '영주', '장군', '왕', '황제', '마스터', '슈퍼 마스터', '슈퍼 그랜드 마스터', '킹 갓 제너럴 그랜드 마스터', '우주의 지배자', '빛, 그 자체'];
+var hierarchy = [,'거지', '천민', '평민', '부자', '귀족', '영주', '장군', '왕', '황제', '마스터', '슈퍼마스터', '슈퍼그랜드마스터', '킹갓제너럴그랜드마스터', '우주의 지배자', '신'];
 
 var submitFlag;
+
+var win = document.getElementById('win');
 
 if (!localStorage.colorPuzzle) {
   localStorage.setItem('colorPuzzle', JSON.stringify({hLevel: 1, sLevel: 1, bLevel: 1}));
 }
 var storageData = JSON.parse(localStorage.getItem('colorPuzzle'));
+
+if ((storageData.hLevel >= 15) && (storageData.sLevel >= 15) && (storageData.bLevel >= 15)) {
+  document.getElementById('title').style.display = 'none';
+  document.getElementById('buttonGroup').style.display = 'none';
+  your.innerHTML = '<p>당신은</p><p class="class">색채의 신</p><p>입니다.</p>'
+  var regame = document.createElement('p');
+  regame.textContent = '처음부터 다시하기';
+  regame.id = 'regame';
+  regame.addEventListener('click', function(event) {
+    localStorage.setItem('colorPuzzle', JSON.stringify({hLevel: 1, sLevel: 1, bLevel: 1}));
+    window.location.reload();
+  });
+  your.appendChild(regame);
+}
 
 yourHueClass.textContent = '색상 : ' + hierarchy[storageData.hLevel];
 yourBrightnessClass.textContent = '명도 : ' + hierarchy[storageData.bLevel];
@@ -64,9 +80,25 @@ function shuffle(arr) {
   return a;
 }
 
+document.getElementById('buttonGroup').addEventListener('mouseover', function(event) {
+  if (event.target.id !== submitFlag) {
+    event.preventDefault();
+    event.target.style.backgroundColor = 'red';
+    var originText = event.target.textContent;
+    event.target.textContent = '도전하기';
+    event.target.style.color = 'white';
+    event.target.addEventListener('mouseleave', function(event) {
+      event.target.textContent = originText;
+      event.target.style.backgroundColor = '';
+      event.target.style.color = '';
+    });
+  }
+});
+
+
 //game
 function game(event) {
-
+  win.style.display = 'none';
   while (board.children.length > 1) {//게임판 비우기
     board.lastElementChild.remove();
   }
@@ -76,10 +108,12 @@ function game(event) {
 
   your.style.display = 'none';
 
+  this.style.cursor = 'default';
+  this.style.backgroundColor = 'red';// 작동 x
+  this.style.color = 'white';        // 작동 x
+
   this.removeEventListener('click', game);
   
-  this.style.backgroundColor = 'red';
-  this.style.color = 'white';
   submitButton.style.display = 'block';
   board.style.display = 'block';
   sideYou.style.display = 'block';
@@ -97,6 +131,12 @@ function game(event) {
 
     answer = makeKeyArray_300(storageData.hLevel*4);
 
+    if (storageData.hLevel >= 15) {
+      win.style.display = 'block';
+      win.textContent = '당신은 색상의 신입니다.';
+      submitButton.style.display = 'none';
+    }
+    
   } else if (this.id === 'startButtonS') {
     submitFlag = 'startButtonS';
 
@@ -108,7 +148,13 @@ function game(event) {
     startButtonH.addEventListener('click', game);
     startButtonB.addEventListener('click', game);
 
-    answer = makeKeyArray_100(storageData.sLevel*4)
+    answer = makeKeyArray_100(storageData.sLevel*4);
+  
+    if (storageData.sLevel >= 15) {
+      win.style.display = 'block';
+      win.textContent = '당신은 채도의 신입니다.';
+      submitButton.style.display = 'none';
+    }
 
   } else if (this.id === 'startButtonB') {
     submitFlag = 'startButtonB';
@@ -121,10 +167,15 @@ function game(event) {
     startButtonH.addEventListener('click', game);
     startButtonS.addEventListener('click', game);
 
-    answer = makeKeyArray_100(storageData.bLevel*4)
+    answer = makeKeyArray_100(storageData.bLevel*4);
+
+    if (storageData.bLevel >= 15) {
+      win.style.display = 'block';
+      win.textContent = '당신은 명도의 신입니다.';
+      submitButton.style.display = 'none';
+    }
   }
   
-  console.log(answer);
   var quiz = shuffle(answer);
 
   var randomColor = Math.floor(Math.random()*359);
@@ -134,22 +185,25 @@ function game(event) {
     madeBlock.classList.add('block');
     madeBlock.id = 'block' + i;
 
-    if (this.id === 'startButtonH') {
+    if ((this.id === 'startButtonH') && (storageData.hLevel < 15)) {
       document.querySelector('.first').style.backgroundColor = 'hsl(0, 100%, 60%)';
       madeBlock.style.backgroundColor = 'hsl(' + quiz[i] + ', 100%, 60%)';
 
-    } else if (this.id === 'startButtonS') {
+    } else if ((this.id === 'startButtonS') && (storageData.sLevel < 15)) {
       document.querySelector('.first').style.backgroundColor = 'hsl(' + randomColor + ', 100%, 50%)';
       madeBlock.style.backgroundColor = 'hsl(' + randomColor + ', ' + quiz[i] + '%, 50%)';
 
-    } else if (this.id === 'startButtonB') {
+    } else if ((this.id === 'startButtonB') && (storageData.bLevel < 15)) {
       document.querySelector('.first').style.backgroundColor = 'white';
       document.querySelector('.first').style.color = 'black';
       madeBlock.style.backgroundColor = 'hsl(0, 0%, ' + quiz[i] + '%)';
     }
     
     madeBlock.setAttribute('key', quiz[i]);
-    board.appendChild(madeBlock);
+
+    if (storageData.bLevel < 15) {
+      board.appendChild(madeBlock);
+    }
 
   }
 
@@ -162,9 +216,9 @@ function game(event) {
   board.appendChild(lastBlock);
 }
 
-startButtonH.addEventListener('click', game);
-startButtonS.addEventListener('click', game);
-startButtonB.addEventListener('click', game);
+startButtonH.addEventListener('click', game, false);
+startButtonS.addEventListener('click', game, false);
+startButtonB.addEventListener('click', game, false);
 
 
 document.addEventListener('dragstart', function(event) {
@@ -177,7 +231,6 @@ document.addEventListener('dragover', function(event) {
 
 document.addEventListener('dragenter', function(event) {
   if (event.target.classList.contains('block')) {
-    console.log(event.target.id);
     event.target.style.borderLeft = '4px solid CornFlowerBlue';
   }
 });
@@ -206,10 +259,19 @@ submitButton.addEventListener('click', function(event) {
     alert('정답입니다!');
     if (submitFlag === 'startButtonH') {
       storageData.hLevel++;
+      if (storageData.hLevel >= 15) {
+        window.location.reload();
+      }
     } else if (submitFlag === 'startButtonS') {
       storageData.sLevel++;
+      if (storageData.sLevel >= 15) {
+        window.location.reload();
+      }
     } else if (submitFlag === 'startButtonB') {
       storageData.bLevel++;
+      if (storageData.bLevel >= 15) {
+        window.location.reload();
+      }
     }
     
     localStorage.setItem('colorPuzzle', JSON.stringify(storageData));
