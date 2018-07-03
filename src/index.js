@@ -196,7 +196,7 @@ function game(event) {
     } else if ((this.id === 'startButtonB') && (storageData.bLevel < 15)) {
       document.querySelector('.first').style.backgroundColor = 'white';
       document.querySelector('.first').style.color = 'black';
-      madeBlock.style.backgroundColor = 'hsl(0, 0%, ' + quiz[i] + '%)';
+      madeBlock.style.backgroundColor = 'hsl(' + randomColor + ', 50%, ' + quiz[i] + '%)';
     }
     
     madeBlock.setAttribute('key', quiz[i]);
