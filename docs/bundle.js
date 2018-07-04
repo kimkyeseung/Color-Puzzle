@@ -278,9 +278,9 @@ function game(event) {
     
     madeBlock.setAttribute('key', quiz[i]);
 
-    if (storageData.bLevel < 15) {
-      board.appendChild(madeBlock);
-    }
+    
+    board.appendChild(madeBlock);
+    
 
   }
 
