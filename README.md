@@ -12,6 +12,6 @@
 ![snapshot](./snapshot01.gif)
 
 ## Tryout
-<https://kimkyeseung.github.io/Color-Puzzle/>{: target="_blank" }
+[게임하기](https://kimkyeseung.github.io/Color-Puzzle/)
 
 ![snapshot](./snapshot02.gif)
